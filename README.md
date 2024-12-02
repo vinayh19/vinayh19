@@ -1,6 +1,6 @@
 - 👋 Hi, I’m Vinay Hariharan (he/him) - @vinayh19
 - 👀 I’m interested in Computational Neuroscience, Bioinformatics, Human Cogniton and professionallly a Data guy!
-- 🌱 I’m currently in Grad school
+- 🌱 I’m currently in Grad school @ ISMMS
 - 📫 Reach me on Linkedin at https://www.linkedin.com/in/vinay-hariharan-71b933145
 
 <!---
