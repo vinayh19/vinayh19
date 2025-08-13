@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name — Academic • Professional</title>
+  <meta name="description" content="Portfolio website for Your Name — research, teaching, publications, projects, and vision." />
+  <meta property="og:title" content="Your Name — Academic • Professional" />
+  <meta property="og:description" content="Research, publications, projects, and vision." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og-image.png" />
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    /* Ultra‑light, fast, accessible styles (no frameworks) */
+    :root{--bg:#ffffff;--fg:#101012;--muted:#6b7280;--card:#f7f7f8;--brand:#0ea5e9;--ring:#bae6fd}
+    @media (prefers-color-scheme: dark){:root{--bg:#0b0b0f;--fg:#e5e7eb;--muted:#9ca3af;--card:#12121a;--brand:#38bdf8;--ring:#075985}}
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji","Segoe UI Emoji"}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1000px;margin:0 auto;padding:24px}
+    header{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 0}
+    nav{display:flex;gap:16px;flex-wrap:wrap}
+    nav a{padding:6px 10px;border-radius:10px}
+    nav a:focus,button:focus{outline:2px solid var(--ring);outline-offset:2px}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--fg);color:var(--bg);border:0;padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn.secondary{background:transparent;color:var(--fg);border:1px solid var(--muted)}
+    .grid{display:grid;gap:16px}
+    @media (min-width: 900px){.grid.cols-3{grid-template-columns:1.2fr 1fr 1fr}}
+    section{padding:28px 0;border-top:1px solid color-mix(in oklab, var(--muted) 30%, transparent)}
+    .card{background:var(--card);border:1px solid color-mix(in oklab, var(--muted) 25%, transparent);padding:18px;border-radius:14px}
+    .muted{color:var(--muted)}
+    h1{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:8px 0}
+    h2{font-size:20px;margin:0 0 6px}
+    .tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid color-mix(in oklab, var(--muted) 35%, transparent)}
+    .list{list-style:none;padding:0;margin:0}
+    .list li{padding:10px 0;border-bottom:1px dashed color-mix(in oklab, var(--muted) 35%, transparent)}
+    footer{padding:24px 0;color:var(--muted)}
+    .avatar{width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid color-mix(in oklab, var(--muted) 30%, transparent)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .pillbar{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{font-size:12px;border:1px solid color-mix(in oklab, var(--muted) 35%, transparent);padding:6px 10px;border-radius:999px}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;padding:2px 6px;border:1px solid color-mix(in oklab, var(--muted) 35%, transparent);border-radius:6px}
+    .search{width:100%;padding:10px 12px;border-radius:12px;border:1px solid color-mix(in oklab, var(--muted) 35%, transparent);background:transparent;color:inherit}
+    .hidden{display:none}
+  </style>
+  <script>
+    // Theme toggle with localStorage
+    (function(){
+      const theme = localStorage.getItem('theme');
+      if(theme){document.documentElement.dataset.theme = theme; if(theme==='light'){document.documentElement.style.colorScheme='light'} }
+      window.toggleTheme = () => {
+        const current = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light');
+        const next = current==='dark'?'light':'dark';
+        document.documentElement.dataset.theme = next;
+        document.documentElement.style.colorScheme = next;
+        localStorage.setItem('theme', next);
+      }
+    })();
+    // Simple client-side filter for publications/projects
+    function filterList(q,id){
+      q = q.toLowerCase();
+      const items = document.querySelectorAll('#'+id+' li');
+      items.forEach(li=>{
+        li.classList.toggle('hidden', !li.textContent.toLowerCase().includes(q));
+      });
+    }
+    // Copy email helper
+    function copyEmail(){
+      const email = document.getElementById('email').textContent.trim();
+      navigator.clipboard.writeText(email).then(()=>{
+        const n = document.getElementById('copyNote');
+        n.textContent = 'Copied!';
+        setTimeout(()=>n.textContent='',1200);
+      });
+    }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Your Name",
+    "jobTitle":"Your Title",
+    "affiliation":{"@type":"Organization","name":"Your Institution"},
+    "url":"https://yourdomain.example",
+    "image":"/avatar.jpg",
+    "sameAs":["https://scholar.google.com/citations?user=yourid","https://orcid.org/0000-0000-0000-0000","https://www.linkedin.com/in/yourhandle","https://x.com/yourhandle"]
+  }
+  </script>
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
+  <div class="container">
+    <header>
+      <div style="display:flex;gap:12px;align-items:center">
+        <img class="avatar" src="avatar.jpg" alt="Portrait of Your Name" />
+        <div>
+          <div class="pillbar">
+            <span class="pill">Academic</span>
+            <span class="pill">Professional</span>
+            <span class="pill">Global Collaborator</span>
+          </div>
+          <h1>Your Name</h1>
+          <div class="muted">Your Title • Your Department • Your Institution</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <a href="#projects">Projects</a>
+        <a href="#vision">Vision</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#contact">Contact</a>
+        <button class="btn secondary" onclick="toggleTheme()" aria-label="Toggle theme">🌓 Theme</button>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section id="about">
+        <div class="grid cols-3">
+          <div class="card" style="grid-column:1 / span 2">
+            <h2>About</h2>
+            <p>1–3 paragraphs that foreground your mission and cross‑disciplinary value. Summarize your research agenda, the problem you are obsessed with, and how your professional work translates to impact.</p>
+            <div class="pillbar">
+              <span class="tag">Keywords</span>
+              <span class="pill">[Domain 1]</span>
+              <span class="pill">[Domain 2]</span>
+              <span class="pill">[Method]</span>
+              <span class="pill">[Region]</span>
+            </div>
+          </div>
+          <div class="card">
+            <h2>At a glance</h2>
+            <ul class="list">
+              <li><strong>Affiliation:</strong> Your Institution</li>
+              <li><strong>Role(s):</strong> Researcher • Lecturer • Consultant</li>
+              <li><strong>Interests:</strong> Topic A, Topic B, Topic C</li>
+              <li><strong>Open to:</strong> Joint projects, talks, media, supervision</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="publications">
+        <h2>Publications</h2>
+        <input class="search" placeholder="Search publications… (title, venue, year)" oninput="filterList(this.value,'publist')" aria-label="Search publications" />
+        <ul id="publist" class="list">
+          <!-- Repeat and replace the sample items with your own -->
+          <li>
+            <div><strong>Article Title</strong> — <em>Journal / Venue</em> (2025)</div>
+            <div class="muted">Authors: Your Name, Co‑Author</div>
+            <div class="pillbar">
+              <a href="#" aria-label="PDF">📄 PDF</a>
+              <a href="#" aria-label="DOI">🔗 DOI</a>
+              <a href="#" aria-label="Code">💻 Code</a>
+              <span class="tag">peer‑reviewed</span>
+            </div>
+          </li>
+          <li>
+            <div><strong>Conference Paper Title</strong> — <em>Conference</em> (2024)</div>
+            <div class="muted">Authors: Your Name, Co‑Author</div>
+            <div class="pillbar">
+              <a href="#">📄 PDF</a>
+              <a href="#">🎥 Talk</a>
+              <span class="tag">best paper</span>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="grid cols-3">
+          <article class="card">
+            <h3>Project Title</h3>
+            <p>One‑sentence hook. What outcome did this produce for people or policy?</p>
+            <div class="pillbar"><span class="pill">Python</span><span class="pill">R</span><span class="pill">Fieldwork</span></div>
+            <p><a href="#">View project →</a></p>
+          </article>
+          <article class="card">
+            <h3>Project Title</h3>
+            <p>One‑sentence hook. Open data, reproducible, global collaboration.</p>
+            <div class="pillbar"><span class="pill">Open Data</span><span class="pill">Policy</span></div>
+            <p><a href="#">View project →</a></p>
+          </article>
+          <article class="card">
+            <h3>Project Title</h3>
+            <p>One‑sentence hook. Media coverage or awards.</p>
+            <div class="pillbar"><span class="pill">Visualization</span><span class="pill">Workshop</span></div>
+            <p><a href="#">View project →</a></p>
+          </article>
+        </div>
+      </section>
+
+      <section id="vision">
+        <h2>Vision & Values</h2>
+        <div class="card">
+          <p>State your big bets for the next 3–5 years. What systems do you want to improve? How will your scholarship and professional practice create leverage at global scale?</p>
+          <ul>
+            <li>Value 1 — how it shows up in your work</li>
+            <li>Value 2 — collaboration style, mentorship, open science</li>
+            <li>Value 3 — equity, access, interdisciplinary bridges</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="teaching">
+        <h2>Teaching & Talks</h2>
+        <div class="card">
+          <ul class="list">
+            <li><strong>Course / Workshop</strong> — Institution (Term, Year) — <a href="#">Syllabus</a> · <a href="#">Slides</a></li>
+            <li><strong>Invited Talk</strong> — Event (Year) — <a href="#">Video</a></li>
+            <li><strong>Panel</strong> — Conference (Year)</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Connect</h2>
+        <div class="grid cols-3">
+          <div class="card">
+            <p>Email: <span id="email">you@institution.edu</span> <button class="btn secondary" onclick="copyEmail()">Copy</button> <span class="muted" id="copyNote"></span></p>
+            <p>Calendly / booking link: <a href="#">Schedule a meeting</a></p>
+            <p>Newsletter: <a href="#">Subscribe</a></p>
+          </div>
+          <div class="card">
+            <p>Profiles</p>
+            <div class="pillbar">
+              <a class="pill" href="#">Google Scholar</a>
+              <a class="pill" href="#">ORCID</a>
+              <a class="pill" href="#">LinkedIn</a>
+              <a class="pill" href="#">X / Twitter</a>
+              <a class="pill" href="#">GitHub</a>
+            </div>
+          </div>
+          <div class="card">
+            <p><span class="tag">Media Kit</span></p>
+            <p>Short bio, headshots, logos, approved descriptions for press & conferences.</p>
+            <p><a href="#">Download →</a></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="muted">© <span id="year"></span> Your Name • Built with pure HTML/CSS/JS for ultra‑low latency. Deployed free on GitHub Pages or Cloudflare Pages.</div>
+    </footer>
+  </div>
+  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+</body>
+</html>
